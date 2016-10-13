@@ -4,6 +4,16 @@
 # Author: Josh Glendenning
 # Usage: pac [options] <command> <args>...
 
+SUDO_PATH=$(command -v sudo)
+
+function sudo {
+  if [ -n $SUDO_PATH ]; then
+    $SUDO_PATH $@
+  else
+    $@
+  fi
+}
+
 function log_info {
     echo "$(tput setaf 4)$1$(tput sgr0)" >&2
 }
